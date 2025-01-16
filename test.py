@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk, Menu, filedialog, messagebox
-from tkinter.scrolledtext import ScrolledText
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 
@@ -108,69 +107,41 @@ class SynaptikApp:
         self.param1_entry.delete(0, tk.END)
         self.param2_entry.delete(0, tk.END)
 
-    # Métodos restantes são iguais ao texto acima devido ao limite de espaço
     def open_project(self):
-        """Abre um projeto existente."""
-        file_path = filedialog.askopenfilename(
-            title="Abrir Projeto",
-            filetypes=(("Arquivos Synaptik", "*.syn"), ("Todos os arquivos", "*.*"))
-        )
-        if file_path:
-            try:
-                with open(file_path, 'r') as file:
-                    data = file.read()
-                    self.log_text.insert(tk.END, f"Projeto aberto: {file_path}\n")
-                    # Aqui você pode implementar a lógica para carregar dados no sistema
-            except Exception as e:
-                messagebox.showerror("Erro", f"Erro ao abrir o projeto: {e}")
+        """Abre um projeto salvo."""
+        filepath = filedialog.askopenfilename()
+        if filepath:
+            self.log_text.insert(tk.END, f"Projeto carregado: {filepath}\n")
 
     def save_project(self):
         """Salva o projeto atual."""
-        file_path = filedialog.asksaveasfilename(
-            title="Salvar Projeto",
-            defaultextension=".syn",
-            filetypes=(("Arquivos Synaptik", "*.syn"), ("Todos os arquivos", "*.*"))
-        )
-        if file_path:
-            try:
-                # Aqui você pode implementar a lógica para salvar os dados do sistema
-                with open(file_path, 'w') as file:
-                    file.write("Dados do projeto")  # Substituir pelo conteúdo real
-                self.log_text.insert(tk.END, f"Projeto salvo: {file_path}\n")
-            except Exception as e:
-                messagebox.showerror("Erro", f"Erro ao salvar o projeto: {e}")
+        filepath = filedialog.asksaveasfilename(defaultextension=".synaptik")
+        if filepath:
+            self.log_text.insert(tk.END, f"Projeto salvo em: {filepath}\n")
 
     def simulation_settings(self):
-        """Abre a janela de configurações de simulação."""
-        messagebox.showinfo("Configurações de Simulação", "Configurações de simulação disponíveis em breve.")
+        """Abre as configurações de simulação."""
+        messagebox.showinfo("Configurações", "Configurações de simulação ainda não implementadas.")
 
     def manage_ai(self):
-        """Gerencia a inteligência artificial."""
-        messagebox.showinfo("Gerenciar IA", "Funcionalidade para gerenciamento de IA em desenvolvimento.")
+        """Gerencia o módulo de IA."""
+        messagebox.showinfo("IA", "Gerenciamento de IA ainda não implementado.")
 
     def import_data(self):
-        """Importa dados para o sistema."""
-        file_path = filedialog.askopenfilename(
-            title="Importar Dados",
-            filetypes=(("Arquivos CSV", "*.csv"), ("Todos os arquivos", "*.*"))
-        )
-        if file_path:
-            self.log_text.insert(tk.END, f"Dados importados de: {file_path}\n")
-            # Adicionar lógica de leitura de dados
+        """Importa dados para a simulação."""
+        filepath = filedialog.askopenfilename()
+        if filepath:
+            self.log_text.insert(tk.END, f"Dados importados de: {filepath}\n")
 
     def show_documentation(self):
-        """Exibe a documentação do sistema."""
-        documentation_url = "https://synaptik-docs.com"  # Substituir pela URL real
-        self.log_text.insert(tk.END, "Abrindo documentação...\n")
-        # Aqui você pode abrir o navegador para a URL acima
+        """Exibe a documentação."""
+        messagebox.showinfo("Documentação", "Documentação ainda não implementada.")
 
     def show_about(self):
         """Exibe informações sobre o software."""
-        messagebox.showinfo(
-            "Sobre",
-            "Synaptik - Sistema de Simulação e Controle\nVersão 1.0\nDesenvolvido por [Seu Nome]"
-        )
+        messagebox.showinfo("Sobre", "Synaptik - Versão 1.0\nDesenvolvido por El Pitchula.")
 
+# Inicia a aplicação
 if __name__ == "__main__":
     root = tk.Tk()
     app = SynaptikApp(root)
